@@ -283,3 +283,77 @@ module screw_hole_negative_volume(hole_d, hole_z, wall_t, unit_x, unit_y, unit_z
         cylinder(r=hole_d/2, h=hole_z+WELDING, $fn=16);
     }
 }
+
+
+//
+// class related stuff
+// from
+// http://forum.openscad.org/parameterized-models-td8303.html
+//
+
+// hash for flat style key-value pair
+// see get_aligned() below for usage.
+function hash00(h, k, _i_=0) = ( 
+    _i_>len(h)-1 ? undef  // key not found 
+    : h[_i_]==k ?    // key found 
+    h[_i_+1]  // return v 
+    : hash(h,k,_i_+2)           
+    );
+
+function hash(h, k, _i_=0) = ( 
+    _i_>len(h)-1 ? undef  // key not found 
+    : h[_i_][0]==k ?    // key found 
+    h[_i_][1]  // return v 
+    : hash(h,k,_i_+1)           
+    );
+
+//
+// misc utilities
+//
+
+//
+// get_aligned(align_x, align_y, align_z, size_x, size_y, size_z) 
+//
+// This returns a point that meets the specified alignment requirement.
+// The point returned is located on an edge of the cube
+//   - whose size is (size_x, size_y, size_z), and
+//   - whose center is at (0,0,0).
+//
+// align_x = { "front" | "center" | "back" }
+// align_y = { "left"  | "center" | "right" }
+// align_z = { "top"   | "center" | "bottom" }
+// size_x, size_y, size_z = size of the cube
+//
+// Note: to generate a flat style key-value pair in a human-readable way,
+// you have to use concat() for now.
+//
+_alignment_map = concat([["front", 1],
+                        ["center", 0],
+                        ["back", -1],
+                        ["left", -1],
+                        ["right", 1],
+                        ["top", 1],
+                        ["bottom", -1]]);
+    
+function get_aligned(align_x, align_y, align_z, size_x, size_y, size_z) = (
+    [ hash(_alignment_map, align_x)*size_x/2,
+      hash(_alignment_map, align_y)*size_y/2,
+      hash(_alignment_map, align_z)*size_z/2 ]);
+
+module get_aligned_verbose(align_x, align_y, align_z, size_x, size_y, size_z) {
+    get_aligned_result = get_aligned(align_x, align_y, align_z, size_x, size_y, size_z);
+    get_aligned_result2 = [ hash(_alignment_map, align_x)*size_x/2,
+                           hash(_alignment_map, align_y)*size_y/2,
+                           hash(_alignment_map, align_z)*size_z/2 ];
+    echo(get_aligned_result=get_aligned_result);
+    echo(get_aligned_result2=get_aligned_result2);
+    
+}
+function front_center(sx, tx) = [-sx/2+tx/2, 0, 0];
+function back_center(sx, tx) = [sx/2, 0, 0];
+function left_center(sy, ty)  = [0, -sy/2+ty/2, 0];
+function right_center(sy, ty) = [0, sy/2-ty/2, 0];
+function top_center(sz, tz) = [0, 0, sz/2-tz/2];
+function bottom_center(sz, tz) = [0, 0, -sz/2+tz/2];
+function board_surface_z(sz, tz) = [0, 0, -sz/2+tz];
+
