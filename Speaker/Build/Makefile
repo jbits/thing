@@ -101,6 +101,10 @@ COMPO = Compo_PAM8403.stl \
 
 COMPO_DEPS = ../Compo.scad ../PAM8403.scad ../MAX98306.scad ../CE32A_Rev1.scad ../microusb.scad ../audiojack.scad ../btaudio.scad ../prim.scad
 
+MICRODOTPHAT = MicroDotPhat.stl
+
+MICRODOTPHAT_DEPS = ../MicroDotPhat.scad ../prim.scad
+
 RELEASE = $(CE32A_REV1) \
           $(CE32A_TYPE2_REV1) \
           $(B1S_REV2) \
@@ -112,7 +116,8 @@ RELEASE = $(CE32A_REV1) \
           $(AUDIOJACK) \
           $(SPEAKER_STAND) \
           $(COMPO) \
-          $(BTAUDIO)
+          $(BTAUDIO) \
+          $(MICRODOTPHAT)
 
 TEST =
 DEBUG =
@@ -379,6 +384,10 @@ btaudio_unit_test.stl: $(BTAUDIO_DEPS)
 btaudio_lid_test.stl: $(BTAUDIO_DEPS)
 	$(OPENSCAD) -D "TARGET=\"lid_test\";"
 	$(PUBLISH_TEST)
+
+MicroDotPhat.stl: $(MICRODOTPHAT_DEPS)
+	$(OPENSCAD) -D "TARGET=\"default\";"
+	$(PUBLISH)
 
 
 clean:
