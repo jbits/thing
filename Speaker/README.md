@@ -30,7 +30,7 @@ This is an enclosure for [SANWU 3W+3W Wireless Bluetooth Audio Receiver Digital 
 Micro Dot Phat Enclosure
 ========================
 
-Available at [Thingiverse](http://http://www.thingiverse.com/thing:1885921)
+Available at [Thingiverse](http://www.thingiverse.com/thing:1885921)
 
 This is an enclosure that just fits [Pimoroni Micro Dot Phat](https://shop.pimoroni.com/products/microdot-phat) available at [@Adafruit](https://www.adafruit.com/products/3248) attached on a Raspberry Pi Zero with the included GPIO header. The lid can be screwed if necessary with following screws.
 
@@ -121,14 +121,6 @@ Assembly requires following parts.
   - 1 x [Adafruit Breadboard Friendly 3.5mm Stereo Headphone Jack](https://www.adafruit.com/product/1699).
   - 1 x [Adafruit USB Micro-B Breakout Board Enclosure](https://www.adafruit.com/product/1833).
 
-This model is a self remix from multiple models as follows.
-
-  - [CE32A 1" Speaker Driver Enclosure](http://www.thingiverse.com/thing:1795831)
-  - [PAM8403-based Tiny Audio Amplifier Board](http://www.thingiverse.com/thing:1788138)
-  - [Adafruit Stereo 3.7W Class D Audio Amplifier MAX98306 Enclosure](http://www.thingiverse.com/thing:1808187)
-  - [Adafruit Breadboard Friendly 3.5mm Stereo Headphone Jack Enclosure](http://www.thingiverse.com/thing:1840314)
-  - [Adafruit USB Micro-B Breakout Board Enclosure](http://www.thingiverse.com/thing:1840325)
-
 小さなパワードスピーカーのようなものです。アナログアンプとスピーカー、音声入力用の3.5mm端子、電源用のMicro USB端子からなっています。
 使用するアンプによって モデルは2種類あります([SainSmart PAM8403 D級ステレオアンプモジュール](http://akizukidenshi.com/catalog/g/gK-09873/) または [Adafruit MAX98306](https://www.switch-science.com/catalog/1140/)。
 
@@ -142,14 +134,6 @@ This model is a self remix from multiple models as follows.
   - 2 x 木ねじ #4 3/8インチ、あるいは M2.2 x 10mm等の下穴直径2mm 深さ10mm前後のもの。
   - 1 x [Adafruit Breadboard Friendly 3.5mm Stereo Headphone Jack](https://www.adafruit.com/product/1699).
   - 1 x [Adafruit USB Micro-B Breakout Board Enclosure](https://www.adafruit.com/product/1833).
-
-このモデルは以下のモデルの自己Remixとなっています。
-
-  - [CE32A 1" Speaker Driver Enclosure](http://www.thingiverse.com/thing:1795831)
-  - [PAM8403-based Tiny Audio Amplifier Board](http://www.thingiverse.com/thing:1788138)
-  - [Adafruit Stereo 3.7W Class D Audio Amplifier MAX98306 Enclosure](http://www.thingiverse.com/thing:1808187)
-  - [Adafruit Breadboard Friendly 3.5mm Stereo Headphone Jack Enclosure](http://www.thingiverse.com/thing:1840314)
-  - [Adafruit USB Micro-B Breakout Board Enclosure](http://www.thingiverse.com/thing:1840325)
 
 
 Adafruit Breadboard Friendly 3.5mm Stereo Headphone Jack Enclosure
