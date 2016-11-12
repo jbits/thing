@@ -138,6 +138,7 @@ audiojack: $(AUDIOJACK)
 speaker_stand: $(SPEAKER_STAND)
 compo: $(COMPO)
 btaudio: $(BTAUDIO)
+microdotphat: $(MICRODOTPHAT)
 
 microusb.stl: $(MICROUSB_DEPS)
 	$(OPENSCAD) -D "TARGET=\"default\";"

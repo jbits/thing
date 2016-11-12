@@ -308,6 +308,7 @@ STL files are copied under Staging folder (production) and StagingTest folder (t
   - speaker_stand
   - compo
   - btaudio
+  - microdotphat
 
 STL files are copied under Staging folder (production) and StagingTest folder (test).
 
