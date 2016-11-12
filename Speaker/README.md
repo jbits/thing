@@ -1,10 +1,10 @@
 Building from OpenSCAD source files
 ===================================
 
-Please refer to [README](https://github.com/ywabiko/3d/blob/master/Speaker/README.md) for instructions to build STL files from OpenScad source file.
+Please refer to [README](https://github.com/ywabiko/thing/blob/master/Speaker/README.md) for instructions to build STL files from OpenScad source file.
 
 OpenScadソースファイルからSTLファイルを生成する手順の詳細については
-[README](https://github.com/ywabiko/3d/blob/master/Speaker/README.md)を参照してください。
+[README](https://github.com/ywabiko/thing/blob/master/Speaker/README.md)を参照してください。
     
 
 
@@ -266,7 +266,7 @@ Following steps have been tested on this environment.
 
 ### How to build all STL files:
 
-    git clone https://github.com/ywabiko/3d
+    git clone https://github.com/ywabiko/thing
     cd Speaker/Build
     make
 
@@ -274,7 +274,7 @@ STL files are copied under Staging folder (production) and StagingTest folder (t
 
 ### How to build STL files for a specific model:
   
-    git clone https://github.com/ywabiko/3d
+    git clone https://github.com/ywabiko/thing
     cd Speaker/Build
     make TARGET
 
@@ -296,7 +296,7 @@ STL files are copied under Staging folder (production) and StagingTest folder (t
 
 Also, if you know the STL file name, you can specify it directly.
 
-    git clone https://github.com/ywabiko/3d
+    git clone https://github.com/ywabiko/thing
     cd Speaker/Build
     make ce32a_rev1.stl
 
