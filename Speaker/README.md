@@ -5,7 +5,40 @@ Please refer to [README](https://github.com/ywabiko/thing/blob/master/Speaker/RE
 
 OpenScadソースファイルからSTLファイルを生成する手順の詳細については
 [README](https://github.com/ywabiko/thing/blob/master/Speaker/README.md)を参照してください。
-    
+
+
+Adafruit GPS Breakout Enclosure
+===============================
+
+(to be) Available at [Thingiverse](http://http://www.thingiverse.com/thing:)
+
+This is an enclosure for [Adafruit Ultimate GPS Breakout - 66 channel w/10 Hz updates - Version 3](https://www.adafruit.com/products/746). Depending on layout, there are horizontal (wide) version and vertical (long) version.
+
+[Adafruit Ultimate GPS Breakout - 66 channel w/10 Hz updates - Version 3](https://www.adafruit.com/products/746)用のケースです。レイアウトに応じて縦型と横型の2種類があります。
+
+
+Bluetooth Audio Receiver Amplifier Enclosure
+============================================
+
+(to be) Available at [Thingiverse](http://http://www.thingiverse.com/thing:)
+
+This is an enclosure for [SANWU 3W+3W Wireless Bluetooth Audio Receiver Digital Amplifier Module Enclosure](http://www.icstation.com/3w3w-wireless-bluetooth-audio-receiver-digital-amplifier-module-p-7653.html).
+
+[SANWU 3W+3W Wireless Bluetooth Audio Receiver Digital Amplifier Module Enclosure](http://www.icstation.com/3w3w-wireless-bluetooth-audio-receiver-digital-amplifier-module-p-7653.html) 用のケースです。
+
+
+Micro Dot Phat Enclosure
+========================
+
+Available at [Thingiverse](http://http://www.thingiverse.com/thing:1885921)
+
+This is an enclosure that just fits [Pimoroni Micro Dot Phat](https://shop.pimoroni.com/products/microdot-phat) available at [@Adafruit](https://www.adafruit.com/products/3248) attached on a Raspberry Pi Zero with the included GPIO header. The lid can be screwed if necessary with following screws.
+
+  - (Optional) 2 x Small screws #4 3/8-in [@HomeDepot](http://www.homedepot.com/p/Everbilt-4-x-3-8-in-Zinc-Plated-Steel-Phillips-Pan-Head-Sheet-Metal-Screw-16-per-Pack-812661/204275188).
+
+[Pimoroni Micro Dot Phat](https://shop.pimoroni.com/products/microdot-phat) 用のケースです。付属のGPIOヘッダを使って Raspberry Pi Zero に装着した状態でぴったりはまるようになっています。アメリカでは [@Adafruit](https://www.adafruit.com/products/3248) で売っています。ふたは必要に応じてネジ留めも可能です。その場合は下記のネジを使用してください。
+
+  - （オプション）2 x 木ねじ #4 3/8インチ、あるいは M2.2 x 10mm等の下穴直径2mm 深さ10mm前後のもの。
 
 
 Tiny Bluetooth Speaker
