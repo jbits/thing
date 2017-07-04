@@ -7,6 +7,20 @@ OpenScadソースファイルからSTLファイルを生成する手順の詳細
 [README](https://github.com/ywabiko/thing/blob/master/Speaker/README.md)を参照してください。
 
 
+Pimoroni Phat Dac Enclosure
+===========================
+
+Available at [Thingiverse](https://www.thingiverse.com/thing:2417798)
+
+This is an enclosure that just fits [Pimoroni Phat Dac](https://shop.pimoroni.com/products/phat-dac) available at [@Adafruit](https://www.adafruit.com/product/3016) attached on a Raspberry Pi Zero with the included GPIO header. The lid can be screwed if necessary with following screws.
+
+  - (Optional) 2 x Small screws #4 3/8-in [@HomeDepot](http://www.homedepot.com/p/Everbilt-4-x-3-8-in-Zinc-Plated-Steel-Phillips-Pan-Head-Sheet-Metal-Screw-16-per-Pack-812661/204275188).
+
+[Pimoroni Phat Dac](https://shop.pimoroni.com/products/phat-dac) 用のケースです。付属のGPIOヘッダを使って Raspberry Pi Zero に装着した状態でぴったりはまるようになっています。アメリカでは [@Adafruit](https://www.adafruit.com/product/3016) で売っています。ふたは必要に応じてネジ留めも可能です。その場合は下記のネジを使用してください。
+
+  - （オプション）2 x 木ねじ #4 3/8インチ、あるいは M2.2 x 10mm等の下穴直径2mm 深さ10mm前後のもの。
+
+
 Adafruit GPS Breakout Enclosure
 ===============================
 
@@ -16,6 +30,19 @@ This is an enclosure for [Adafruit Ultimate GPS Breakout - 66 channel w/10 Hz up
 
 [Adafruit Ultimate GPS Breakout - 66 channel w/10 Hz updates - Version 3](https://www.adafruit.com/products/746)用のケースです。レイアウトに応じて縦型と横型の2種類があります。
 
+
+Pimoroni Phat Dac Enclosure
+===========================
+
+Available at [Thingiverse](http://www.thingiverse.com/thing:1885921)
+
+This is an enclosure that just fits [Pimoroni Phat Dac](https://shop.pimoroni.com/products/phat-dac) available at [@Adafruit](https://www.adafruit.com/product/3016) attached on a Raspberry Pi Zero W with the included GPIO header. The lid can be screwed if necessary with following screws.
+
+  - (Optional) 2 x Small screws #4 3/8-in [@HomeDepot](http://www.homedepot.com/p/Everbilt-4-x-3-8-in-Zinc-Plated-Steel-Phillips-Pan-Head-Sheet-Metal-Screw-16-per-Pack-812661/204275188).
+
+[Pimoroni Phat Dac](https://shop.pimoroni.com/products/phat-dac) 用のケースです。付属のGPIOヘッダを使って Raspberry Pi Zero に装着した状態でぴったりはまるようになっています。アメリカでは [@Adafruit](https://www.adafruit.com/product/3016) で売っています。ふたは必要に応じてネジ留めも可能です。その場合は下記のネジを使用してください。
+
+  - （オプション）2 x 木ねじ #4 3/8インチ、あるいは M2.2 x 10mm等の下穴直径2mm 深さ10mm前後のもの。
 
 Bluetooth Audio Receiver Amplifier Enclosure
 ============================================
@@ -309,6 +336,7 @@ STL files are copied under Staging folder (production) and StagingTest folder (t
   - compo
   - btaudio
   - microdotphat
+  - phatdac
 
 STL files are copied under Staging folder (production) and StagingTest folder (test).
 
@@ -324,6 +352,7 @@ Also, if you know the STL file name, you can specify it directly.
 As a simple method to generate multiple STL files from single source file, model definition and rendering configuration are seperated into different modules (but still in the same source file) as follows.
 
 In foo.scad, the top level module will change rendering according to TARGET.
+By default, no stand is generated. If "with_stand=1" is specified, it generates a stand with the foo object.
 
     TARGET="default";
     module foo_main(target=TARGET) { // rendering definition

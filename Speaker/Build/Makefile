@@ -105,6 +105,10 @@ MICRODOTPHAT = MicroDotPhat.stl
 
 MICRODOTPHAT_DEPS = ../MicroDotPhat.scad ../prim.scad
 
+PHATDAC = PhatDac.stl
+
+PHATDAC_DEPS = ../PhatDac.scad ../prim.scad
+
 RELEASE = $(CE32A_REV1) \
           $(CE32A_TYPE2_REV1) \
           $(B1S_REV2) \
@@ -117,7 +121,8 @@ RELEASE = $(CE32A_REV1) \
           $(SPEAKER_STAND) \
           $(COMPO) \
           $(BTAUDIO) \
-          $(MICRODOTPHAT)
+          $(MICRODOTPHAT) \
+          $(PHATDAC)
 
 TEST =
 DEBUG =
@@ -139,6 +144,7 @@ speaker_stand: $(SPEAKER_STAND)
 compo: $(COMPO)
 btaudio: $(BTAUDIO)
 microdotphat: $(MICRODOTPHAT)
+phatdac: $(PHATDAC)
 
 microusb.stl: $(MICROUSB_DEPS)
 	$(OPENSCAD) -D "TARGET=\"default\";"
@@ -390,6 +396,9 @@ MicroDotPhat.stl: $(MICRODOTPHAT_DEPS)
 	$(OPENSCAD) -D "TARGET=\"default\";"
 	$(PUBLISH)
 
+PhatDac.stl: $(PHATDAC_DEPS)
+	$(OPENSCAD) -D "TARGET=\"default\";"
+	$(PUBLISH)
 
 clean:
 	rm -f *.stl

@@ -13,14 +13,119 @@
 
 WELDING=0.1;
 
-round2_plate(30,20,2);
+//prim_round_xplate0(8,10,12,1,32);
 
-translate([10,0,0])
-  round2_plate(60,20,2);
+round3_tray_box(size_x=60, size_y=60, size_z=80, size_t=1, size_b=1, corner_r=6);
 
-translate([20,0,0])
-  round2_plate(100,20,2);
+//
+// size_x, size_y, size_z
+// size_t
+// size_b
+// corner_r
+// circle_r
 
+module round3_tray_box(size_x=20, size_y=20, size_z=30, size_t=2, size_b=1, corner_r=3){
+    circle_r = size_t/2;
+    translate([0,0,size_z])
+        round3_plate(size_x=size_x,size_y=size_y,size_z=size_z,corner_r=corner_r,circle_r=circle_r);
+
+    translate([size_x/2,size_y/2,size_z/2]) {
+        difference() {
+            prim_round_zplate0(size_x,size_y,size_z,corner_r+circle_r,64);
+            translate([0,0,size_b]) {
+                prim_round_zplate0(size_x-size_t*2,size_y-size_t*2,size_z+WELDING,corner_r-circle_r,64);
+            }
+        }
+    }
+}
+
+//
+// corner_r+circle_r <= size_x/2 (and size_y/2)
+//
+module round3_plate(size_x, size_y, size_z, corner_r, circle_r)
+{
+    // 4 corners
+    for(x=[[[0,0,0],0],[[size_x,0,0],90],[[size_x,size_y,0],180],[[0,size_y,0],270]]) {
+        v = x[0];
+        rot = x[1];
+        translate(v){
+            rotate([0,0,rot]){
+                round3_corner(corner_r, circle_r);
+            }
+        }
+    }
+
+    // beams between 2 corners
+    for(x=[[[size_x/2,circle_r,0],0], [[size_x-circle_r, size_y/2, 0],90],
+           [[size_x/2,size_y-circle_r,0],180],
+           [[circle_r,size_y/2,0],270],
+            ]){
+        v = x[0];
+        rot = x[1];
+        translate(v) {
+            rotate([0,90,rot]) {
+                cylinder(r=circle_r,h=size_x-corner_r*2-circle_r*2, $fn=64, center=true);
+            }
+        }
+    }
+}
+
+//
+// corner_r+circle_r <= size_x/2 (and size_y/2)
+//
+module round3_box(size_x, size_y, size_z, corner_r, circle_r)
+{
+     hull() {
+         translate([-size_x/2, -size_y/2, -size_z/2]) {
+             round3_plate(size_x, size_y, size_z, corner_r, circle_r);
+         }
+         translate([-size_x/2, -size_y/2, size_z/2]) {
+             round3_plate(size_x, size_y, size_z, corner_r, circle_r);
+         }
+    }
+   
+}
+
+module round3_corner(corner_r, circle_r)
+{
+    translate([corner_r+circle_r, corner_r+circle_r, 0]) {
+        rotate([0,0,180]) {
+            rotate_extrude(angle=90, convexity=10, $fn=64){
+                translate([corner_r, 0, 0]) {
+                    circle(r = circle_r, $fn = 100);
+                }
+            }
+        }
+    }
+}
+
+module round3_plate_frame(size_x, size_y, size_z, radius)
+{
+    hull(){
+        translate([0,0,0])
+            sphere(r=radius, $fn=32);
+        translate([size_x,0,0])
+            sphere(r=radius, $fn=32);
+    }
+    hull(){
+        translate([0,0,0])
+            sphere(r=radius, $fn=32);
+        translate([0,size_y,0])
+            sphere(r=radius, $fn=32);
+    }
+    hull(){
+        translate([0,size_y,0])
+            sphere(r=radius, $fn=32);
+        translate([size_x,size_y,0])
+            sphere(r=radius, $fn=32);
+    }
+    hull(){
+        translate([size_x,0,0])
+            sphere(r=radius, $fn=32);
+        translate([size_x,size_y,0])
+            sphere(r=radius, $fn=32);
+    }
+}
 
 module round2_plate(width, height, radius)
 {
@@ -73,6 +178,183 @@ module prim_round_cube0(px0, py0, pz0,  pr0, pf)
         sphere(r=pr, $fn=pf);
     }
 }
+
+module prim_round_cube1(px0, py0, pz0,  pr0, pf)
+{
+    pr = pr0;
+    px = px0 - pr*2;
+    py = py0 - pr*2;
+    pz = pz0 - pr*2;
+    translate([0, 0, 0]) {
+        hull(){
+            translate([0,0,pz/2]) {
+                hull(){
+                    translate([0,py/2,0]) {
+                        prim_round_cube1_x(px, pr, pf);
+                    }
+                    translate([0,-py/2,0]) {
+                        prim_round_cube1_x(px, pr, pf);
+                    }
+                }
+            }
+            translate([0,0,-pz/2]) {
+                hull(){
+                    translate([0,py/2,0]) {
+                        prim_round_cube1_x(px, pr, pf);
+                    }
+                    translate([0,-py/2,0]) {
+                        prim_round_cube1_x(px, pr, pf);
+                    }
+                }
+            }
+        }
+    }
+}
+
+module prim_round_cube1_x(px, pr, pf){
+    hull() {
+        translate([px/2,0,0]) {
+            sphere(r=pr, $fn=pf, center=true);
+        }
+        translate([-px/2,0,0]) {
+            sphere(r=pr, $fn=pf, center=true);
+        }
+    }
+}
+
+module prim_round_cube1_y(py, pr, pf){
+    hull() {
+        translate([0,py/2,0]) {
+            sphere(r=pr, $fn=pf, center=true);
+        }
+        translate([0,-py/2,0]) {
+            sphere(r=pr, $fn=pf, center=true);
+        }
+    }
+}
+
+module prim_round_cover(px0, py0, pz0,  pr0, pf)
+{
+    pr = pr0;
+    px = px0 - pr*2;
+    py = py0 - pr*2;
+    pz = pz0 - pr*2;
+    translate([0, 0, 0]) {
+            translate([0,0,pz/2]) {
+                hull(){
+                    translate([0,py/2,0]) {
+                        prim_round_cube1_x(px, pr, pf);
+                    }
+                    translate([0,-py/2,0]) {
+                        prim_round_cube1_x(px, pr, pf);
+                    }
+                }
+            }
+
+            translate([0,0,-pr/2+WELDING/2]) {
+                prim_round_zplate0(px0, py0, pz0-pr+WELDING, pr, pf);
+            }
+    }
+}
+
+// cover with ridge, center at (0,0,0)
+module prim_round_cover_ridge0(ox, oy, oz, or, of)
+{
+    translate([0,0,-oz/2])
+        prim_round_cover_ridge(ox, oy, oz, or, of);
+}
+
+// cover with ridge, center at (0,0) and placed on z=0-surface (X/Y surface), facing positive Z
+module prim_round_cover_ridge(ox0, oy0, oz, or, of)
+{
+    ox = ox0-or*2;
+    oy = oy0-or*2;
+      
+    hull() {
+        translate([ox/2,oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+        translate([-ox/2,oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+    }
+    hull() {
+        translate([-ox/2,oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+        translate([-ox/2,-oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+    }
+    hull() {
+        translate([-ox/2,-oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+        translate([ox/2,-oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+    }
+    hull() {
+        translate([ox/2,-oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+        translate([ox/2,oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+    }
+}
+
+module prim_round_cover_wall_x(ox0, oy0, oz, or, of)
+{
+    ox = ox0-or*2;
+    oy = oy0-or*2;
+      
+    hull() {
+        translate([ox/2,0,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+        translate([-ox/2,0,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+    }
+}
+module prim_round_cover_wall_y(ox0, oy0, oz, or, of)
+{
+    ox = ox0-or*2;
+    oy = oy0-or*2;
+      
+    hull() {
+        translate([0,oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+        translate([0,-oy/2,0]) {
+            prim_round_pillar(oz,or,of);
+        }
+    }
+}
+
+module prim_round_pillar(oh,or,of) {
+    hull() {
+        translate([0,0,oh-or]) {
+            sphere(r=or, $fn=of, center=true);
+        }
+        translate([0,0,or]) {
+            cylinder(r=or, h=or*2, $fn=of, center=true);
+        }
+    }
+}
+
+module prim_round_cube1_x_cylinder(px, pr, pf){
+    hull() {
+        translate([px/2,0,0]) {
+            cylinder(r=pr, h=pr*2, $fn=pf, center=true);
+        }
+        translate([-px/2,0,0]) {
+            cylinder(r=pr, h=pr*2, $fn=pf, center=true);
+        }
+    }
+}
+
 
 // px0,py0 = width(x-axis),height(y-axis), center at (0,0), facing x-axis posiive
 // pz = thickness (z-axis from z=0)
@@ -357,3 +639,122 @@ function top_center(sz, tz) = [0, 0, sz/2-tz/2];
 function bottom_center(sz, tz) = [0, 0, -sz/2+tz/2];
 function board_surface_z(sz, tz) = [0, 0, -sz/2+tz];
 
+
+// NOTE: this requires "r >= w"
+module prim_arc_ball(r=10, w=1, h=1, s=90, fn=32, with_edge=1){
+
+    // if you change intesection() to union(), you can tell the algorithm easily.
+    translate([0,0,0]) {
+        intersection() {
+            union() {
+                // polygon frame
+                translate([0,0,-r/2-h/2]) {
+                    prim_arc_intersection(r=r, w=w, h=r, s=s, fn=fn);
+                }
+            }
+
+            rotate_extrude(convexity = 10, $fn=fn) {
+                translate([r, 0, 0]) {
+                    circle(r = w, $fn=fn);
+                }
+            }
+        }
+
+        if (with_edge) {
+            // edge balls
+            for (a=[s/2, -s/2]) {
+                rotate([0, 0, a]) {
+                    translate([r,0,0]) {
+                        sphere(r=w, $fn=fn, center=true);
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+// prim_arc_round: rounded arc, center at [0,0,0], -2/s to 2/s.
+//
+// r: radius
+// w: width
+// h: height
+// s: theta
+// fn: $fn
+//
+module prim_arc_round(r=10, w=1, h=1, s=90, fn=32, with_edge=1){
+
+    sh = s/2;   // half theta
+    ro = r+w/2; // outer r
+    ri = r-w/2; // inner r
+    rt  = 1;    // thikness of ridge
+
+    // if you change intesection() to union(), you can tell the algorithm easily.
+    translate([0,0,-h/2]) {
+        intersection() {
+            union() {
+                // polygon frame
+                prim_arc_intersection(r=r, w=w, h=h, s=s, fn=fn);
+
+                if (with_edge) {
+                    // rounded edges
+                    translate([0, 0, -1]) {
+                        for (a=[sh, -sh]) {
+                            translate([r*cos(a), r*sin(a), 0]) {
+                                cylinder(r=w/2, h=h*2, $fn=fn);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // arc body
+            union() {
+                difference() {
+                    // outer arc
+                    union() {
+                        cylinder(r=ro, h=h, $fn=fn);
+                    }
+                    // innner arc
+                    union() {
+                        translate([0, 0, 0]) {
+                            cylinder(r=ri, h=h+WELDING, $fn=fn);
+                        }
+                    }
+                }
+            }
+        }
+
+    }    
+}
+
+
+module prim_arc_intersection(r=10, w=1, h=1, s=90, fn=32) {
+    sh = s/2;   // half theta
+    ro = r*2+w/2; // outer r
+    ri = r*2-w/2; // inner r
+    rt  = 1;    // thikness of ridge
+
+    union() {
+        translate([0, 0, -1]) {
+            linear_extrude(height=h*2) {
+                if (s<180) {
+                    polygon([[0, 0],
+                             [ro*cos(-sh), ro*sin(-sh)],
+                             [ro+WELDING,  ro*sin(-sh)],
+                             [ro+WELDING,  ro*sin(sh)],
+                             [ro*cos(sh),  ro*sin(sh)]], convexity=1);
+                } else {
+                    polygon([[0, 0],
+                             [ro*cos(-sh), ro*sin(-sh)],
+                             [-ro,  -ro],
+                             [ro,  -ro],
+                             [ro,  ro],
+                             [-ro,  ro],
+                             [ro*cos(sh),  ro*sin(sh)]], convexity=1);
+                }
+            }
+        }
+    }
+
+}
